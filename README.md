@@ -4,7 +4,13 @@
 
 参考 [khazix-skills](https://github.com/KKKKhazix/khazix-skills) 的技能合集与插件分发方式搭建。每个技能独立维护，Claude Code 和 Codex 共用同一份内容。
 
-**当前状态：基础框架已建立，正式技能 0 个。** 模板不会作为技能安装；先加入自己的技能，再安装使用。
+**当前正式技能：1 个。** 模板不会作为技能安装。
+
+## 技能目录
+
+| 技能 | 用途 |
+| --- | --- |
+| [viral-longform-zh](skills/viral-longform-zh/) | 长图文创作与改稿公式库，涵盖标题、开篇、结构、正文、结尾和配套要素，共 24 个公式。 |
 
 ## 新增技能
 
@@ -29,7 +35,7 @@ python3 -m unittest discover -s tests -v
 
 ### Claude Code
 
-有正式技能后，在 Claude Code 中执行：
+在 Claude Code 中执行：
 
 ```text
 /plugin marketplace add wadekillua/jackson-marketplace
@@ -83,7 +89,7 @@ jackson-marketplace/
 ├── plugin.json                     # 插件身份、版本和简介的维护入口
 ├── .agents/plugins/marketplace.json # Codex 市场清单（自动生成）
 ├── .claude-plugin/                 # Claude Code 兼容清单（自动生成）
-├── skills/                         # 正式技能，初始为空
+├── skills/viral-longform-zh/        # 首个正式技能
 ├── templates/skill/SKILL.md         # 新技能模板，不参与分发
 ├── scripts/manage.py               # 新增、同步、校验
 ├── tests/                          # 维护脚本的行为测试

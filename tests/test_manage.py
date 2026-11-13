@@ -58,10 +58,31 @@ class LibraryTest(unittest.TestCase):
         (target / "SKILL.md").write_text('---\nname: other\ndescription: "说明"\n---\n正文\n')
         self.assertTrue(any("不一致" in error for error in manage.check(self.root)))
 
+    def test_multiline_description_is_accepted(self):
+        target = self.root / "skills/sample"
+        target.mkdir()
+        for marker in ("|", ">", "|-", ">-", "|+", ">+"):
+            with self.subTest(marker=marker):
+                (target / "SKILL.md").write_text(
+                    f"---\nname: sample\ndescription: {marker}\n  中文能力说明。\n  使用场景。\nversion: 0.1.0\n---\n正文\n",
+                    encoding="utf-8",
+                )
+                self.assertEqual(manage.check(self.root), [])
+
+    def test_empty_multiline_description_is_rejected(self):
+        target = self.root / "skills/sample"
+        target.mkdir()
+        (target / "SKILL.md").write_text(
+            "---\nname: sample\ndescription: |\n  \nversion: 0.1.0\n---\n正文\n",
+            encoding="utf-8",
+        )
+        self.assertTrue(any("description" in error for error in manage.check(self.root)))
+
     def test_stale_manifest_fails_and_sync_repairs_it(self):
         path = self.root / "plugin.json"
         metadata = json.loads(path.read_text())
-        metadata["version"] = "0.2.0"
+        major, minor, patch = map(int, metadata["version"].split("."))
+        metadata["version"] = f"{major}.{minor}.{patch + 1}"
         path.write_text(json.dumps(metadata))
         self.assertTrue(any("不同步" in error for error in manage.check(self.root)))
         manage.sync(self.root)

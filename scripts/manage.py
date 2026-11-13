@@ -92,7 +92,13 @@ def check_skill(directory):
                 errors.append(f"{directory.name}: {key} 须出现一次")
                 continue
             value = values[0].strip()
-            if value.startswith('"'):
+            if key == "description" and re.fullmatch(r"[|>][-+]?", value):
+                block = re.search(
+                    r"^description:[ \t]*[|>][-+]?[ \t]*\r?\n((?:(?:[ \t]+[^\n]*|)[\n]|[ \t]+[^\n]*$)*)",
+                    match[1], re.M,
+                )
+                value = "\n".join(line.strip() for line in block[1].splitlines()).strip() if block else ""
+            elif value.startswith('"'):
                 try:
                     value = json.loads(value)
                 except json.JSONDecodeError:
@@ -101,7 +107,7 @@ def check_skill(directory):
             elif value.startswith("'") and value.endswith("'"):
                 value = value[1:-1].replace("''", "'")
             if not isinstance(value, str) or not value.strip() or value in ("|", ">", "|-", ">-"):
-                errors.append(f"{directory.name}: {key} 须为非空单行文本")
+                errors.append(f"{directory.name}: {key} 须为非空文本（description 支持多行块）")
             else:
                 fields[key] = value
         if fields.get("name") != directory.name:
