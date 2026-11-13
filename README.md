@@ -4,7 +4,7 @@
 
 参考 [khazix-skills](https://github.com/KKKKhazix/khazix-skills) 的技能合集与插件分发方式搭建。每个技能独立维护，Claude Code 和 Codex 共用同一份内容。
 
-**当前正式技能：3 个。** 模板不会作为技能安装。
+**当前正式技能：3 个。** 模板内嵌在维护脚本中，不会被安装。
 
 ## 技能目录
 
@@ -101,8 +101,7 @@ jackson-marketplace/
 │   ├── viral-longform-zh/          # 长图文创作公式
 │   ├── bidirectional-steelman/     # 双向钢人论证
 │   └── big-ambition-prompt/        # 大野心提示词
-├── templates/skill/SKILL.md         # 新技能模板，不参与分发
-├── scripts/manage.py               # 新增、同步、校验
+├── scripts/manage.py               # 新增、同步、校验（内嵌技能模板）
 ├── tests/                          # 维护脚本的行为测试
 └── .github/workflows/validate.yml   # 自动校验
 ```

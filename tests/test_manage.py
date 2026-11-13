@@ -17,7 +17,6 @@ class LibraryTest(unittest.TestCase):
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
         shutil.copy(ROOT / "plugin.json", self.root)
-        shutil.copytree(ROOT / "templates", self.root / "templates")
         (self.root / "skills").mkdir()
         manage.sync(self.root)
 
@@ -89,8 +88,14 @@ class LibraryTest(unittest.TestCase):
         self.assertEqual(manage.check(self.root), [])
 
     def test_symlink_to_external_skill_is_rejected(self):
+        external = self.root / "external"
+        external.mkdir()
+        (external / "SKILL.md").write_text(
+            '---\nname: external\ndescription: "外部技能。"\n---\n\n正文\n',
+            encoding="utf-8",
+        )
         target = self.root / "skills/external"
-        target.symlink_to(self.root / "templates/skill", target_is_directory=True)
+        target.symlink_to(external, target_is_directory=True)
         self.assertTrue(any("符号链接" in error for error in manage.check(self.root)))
 
 

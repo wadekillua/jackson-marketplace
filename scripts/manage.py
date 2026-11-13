@@ -11,6 +11,24 @@ ROOT = Path(__file__).resolve().parents[1]
 MARKETPLACE = "jackson-marketplace"
 NAME_PATTERN = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
 
+SKILL_TEMPLATE = """---
+name: {{NAME}}
+description: {{DESCRIPTION}}
+---
+
+# {{NAME}}
+
+TODO: 写清这个技能要交付什么，以及判断任务完成的标准。
+
+## 工作方式
+
+TODO: 补充会改变执行决策的步骤、必要输入和约束；删除通用常识。
+
+## 配套资源
+
+TODO: 需要时添加 scripts/、references/ 或 assets/ 并在此引用；不需要则删除本节。
+"""
+
 
 def valid_name(name):
     return len(name) <= 64 and NAME_PATTERN.fullmatch(name) is not None
@@ -64,7 +82,7 @@ def new_skill(root, name, description):
         raise ValueError("技能名称须为不超过 64 字符的小写英文、数字和连字符")
     if not description.strip() or "\n" in description or "\r" in description:
         raise ValueError("description 须为非空的单行文本")
-    content = (root / "templates/skill/SKILL.md").read_text(encoding="utf-8")
+    content = SKILL_TEMPLATE
     # Substitute in one pass: user text may itself contain template markers.
     values = {"NAME": name, "DESCRIPTION": json.dumps(description, ensure_ascii=False)}
     content = re.sub(r"\{\{(NAME|DESCRIPTION)\}\}", lambda match: values[match[1]], content)
