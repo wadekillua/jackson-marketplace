@@ -4,7 +4,7 @@
 
 参考 [khazix-skills](https://github.com/KKKKhazix/khazix-skills) 的技能合集与插件分发方式搭建。每个技能独立维护，Claude Code 和 Codex 共用同一份内容。
 
-**当前正式技能：3 个。** 模板内嵌在维护脚本中，不会被安装。
+**当前正式技能：3 个。** 插件会带上整个仓库，但只有 `skills/` 下的目录会被当作技能加载；模板内嵌在维护脚本里。
 
 ## 技能目录
 

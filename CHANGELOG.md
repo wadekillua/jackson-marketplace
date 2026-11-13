@@ -1,5 +1,11 @@
 # 更新记录
 
+## 0.6.0 — 2026-11-14
+
+- 删除 `skills/viral-longform-zh/README.md`：内容与根 README 重复，且安装到个人技能目录后相对链接失效；独有的速查表与使用建议已存在于 SKILL.md。
+- 删除 `skills/.gitkeep`，校验逻辑不再为占位文件保留特判。
+- 清理本地 `.DS_Store` 与 `__pycache__` 产物。
+
 ## 0.5.0 — 2026-11-14
 
 - 移除仓库中的 `templates/` 目录，新技能模板内嵌到 `scripts/manage.py`，`new` 命令行为不变。

@@ -1,6 +1,6 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "jackson-skills",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Jackson 的个人技能库，逐步收录产品、前端、设计与写作工作流。"
 }

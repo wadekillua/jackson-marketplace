@@ -160,7 +160,7 @@ def check(root):
             errors.append(f"{path.name}: 分发目录不允许符号链接")
         elif path.is_dir():
             errors.extend(check_skill(path))
-        elif path.name != ".gitkeep":
+        else:
             errors.append(f"skills/{path.name}: 技能须放在独立目录中")
     return errors
 
