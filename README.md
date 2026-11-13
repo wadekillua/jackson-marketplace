@@ -4,7 +4,7 @@
 
 参考 [khazix-skills](https://github.com/KKKKhazix/khazix-skills) 的技能合集与插件分发方式搭建。每个技能独立维护，Claude Code 和 Codex 共用同一份内容。
 
-**当前正式技能：2 个。** 模板不会作为技能安装。
+**当前正式技能：3 个。** 模板不会作为技能安装。
 
 ## 技能目录
 
@@ -12,10 +12,13 @@
 | --- | --- |
 | [viral-longform-zh](skills/viral-longform-zh/) | 长图文创作与改稿公式库，涵盖标题、开篇、结构、正文、结尾和配套要素，共 24 个公式。 |
 | [bidirectional-steelman](skills/bidirectional-steelman/) | 双向钢人论证：先澄清问题、给出支持与反对的最强理由，只问一个关键问题；回答后再给判断与行动。 |
+| [大野心提示词 · big-ambition-prompt](skills/big-ambition-prompt/) | 从高度、深度、广度提升任务，输出简要分析、可直接使用的正式提示词和必要前置条件。 |
 
 使用示例：
 
 > 用 bidirectional-steelman 帮我分析：我想把个人技能库改成私有仓库。先做双向钢人论证，只问一个关键问题，等我回答后再给判断。
+
+> 用“大野心提示词”改写这项任务：为我的个人技能库设计一套持续维护方案。
 
 ## 新增技能
 
@@ -96,7 +99,8 @@ jackson-marketplace/
 ├── .claude-plugin/                 # Claude Code 兼容清单（自动生成）
 ├── skills/                         # 正式技能
 │   ├── viral-longform-zh/          # 长图文创作公式
-│   └── bidirectional-steelman/     # 双向钢人论证
+│   ├── bidirectional-steelman/     # 双向钢人论证
+│   └── big-ambition-prompt/        # 大野心提示词
 ├── templates/skill/SKILL.md         # 新技能模板，不参与分发
 ├── scripts/manage.py               # 新增、同步、校验
 ├── tests/                          # 维护脚本的行为测试
