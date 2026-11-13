@@ -156,6 +156,8 @@ def check(root):
     if not skills.is_dir():
         return errors + ["缺少 skills/ 目录"]
     for path in sorted(skills.iterdir()):
+        if path.name.startswith("."):
+            continue  # .DS_Store 等系统文件不是技能内容
         if path.is_symlink():
             errors.append(f"{path.name}: 分发目录不允许符号链接")
         elif path.is_dir():

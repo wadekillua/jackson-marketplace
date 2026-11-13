@@ -87,6 +87,10 @@ class LibraryTest(unittest.TestCase):
         manage.sync(self.root)
         self.assertEqual(manage.check(self.root), [])
 
+    def test_system_dotfile_in_skills_is_ignored(self):
+        (self.root / "skills/.DS_Store").write_text("noise", encoding="utf-8")
+        self.assertEqual(manage.check(self.root), [])
+
     def test_symlink_to_external_skill_is_rejected(self):
         external = self.root / "external"
         external.mkdir()
