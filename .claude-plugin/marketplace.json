@@ -1,0 +1,15 @@
+{
+  "name": "jackson-marketplace",
+  "metadata": {
+    "description": "Jackson 的个人技能库，逐步收录产品、前端、设计与写作工作流。"
+  },
+  "owner": {
+    "name": "Jackson"
+  },
+  "plugins": [
+    {
+      "name": "jackson-skills",
+      "source": "./"
+    }
+  ]
+}
