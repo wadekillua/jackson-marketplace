@@ -4,7 +4,7 @@
 
 参考 [khazix-skills](https://github.com/KKKKhazix/khazix-skills) 的技能合集与插件分发方式搭建。每个技能独立维护，Claude Code 和 Codex 共用同一份内容。
 
-**当前正式技能：4 个。** 插件会带上整个仓库，但只有 `skills/` 下的目录会被当作技能加载；模板内嵌在维护脚本里。
+**当前正式技能：3 个。** 插件会带上整个仓库，但只有 `skills/` 下的目录会被当作技能加载；模板内嵌在维护脚本里。
 
 ## 技能目录
 
@@ -13,7 +13,6 @@
 | [viral-longform-zh](skills/viral-longform-zh/) | 长图文创作与改稿公式库，涵盖标题、开篇、结构、正文、结尾和配套要素，共 24 个公式。 |
 | [bidirectional-steelman](skills/bidirectional-steelman/) | 双向钢人论证：先澄清问题、给出支持与反对的最强理由，只问一个关键问题；回答后再给判断与行动。 |
 | [大野心提示词 · big-ambition-prompt](skills/big-ambition-prompt/) | 从高度、深度、广度提升任务，输出简要分析、可直接使用的正式提示词和必要前置条件。 |
-| [一分钟治片慌标题 · onetake-title](skills/onetake-title/) | 公众号影视类文章标题创作：命中情绪、争议、共鸣至少一项，输出 30 字以内标题；含 4 类标题公式、爆款案例与禁用词约束。 |
 
 使用示例：
 
@@ -101,8 +100,7 @@ jackson-marketplace/
 ├── skills/                         # 正式技能
 │   ├── viral-longform-zh/          # 长图文创作公式
 │   ├── bidirectional-steelman/     # 双向钢人论证
-│   ├── big-ambition-prompt/        # 大野心提示词
-│   └── onetake-title/              # 公众号影视标题
+│   └── big-ambition-prompt/        # 大野心提示词
 ├── scripts/manage.py               # 新增、同步、校验（内嵌技能模板）
 ├── tests/                          # 维护脚本的行为测试
 └── .github/workflows/validate.yml   # 自动校验
