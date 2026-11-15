@@ -39,6 +39,36 @@ python3 -m unittest discover -s tests -v
 
 > 在这个仓库新增一个个人技能，用于【具体工作】。先了解我的输入、输出与完成标准，再创建技能，补全模板并检查。
 
+## 提交前安全扫描
+
+仓库自带 pre-commit 钩子：**每次 `git commit` 前**扫描暂存内容里的密钥、个人隐私和危险指令，命中就直接拦下提交（在本机完成，不依赖 GitHub）。
+
+新克隆的副本先启用一次：
+
+```bash
+bash scripts/install-hooks.sh
+```
+
+扫描内容：
+
+| 类别 | 举例 |
+| --- | --- |
+| 密钥与令牌 | GitHub / OpenAI / Anthropic / AWS / Google / Slack / Stripe / npm / PyPI 令牌、私钥块、JWT、带密码的连接串、通用 `api_key=` 赋值 |
+| 个人隐私 | `/Users/<名字>` 等本机绝对路径、私有笔记库路径、飞书 token、身份证号；邮箱和手机号只提醒不拦截 |
+| 危险指令 | 递归删除根目录、下载后直接管道执行、磁盘格式化与提权删除；以及「让 Agent 跳过用户确认」这类越权措辞 |
+
+配套命令：
+
+```bash
+python3 scripts/scan_secrets.py --staged    # 只扫暂存区（钩子调用的就是它）
+python3 scripts/scan_secrets.py --all       # 扫工作区全部文件
+python3 scripts/scan_secrets.py --history   # 扫 git 历史里的所有内容
+```
+
+误报处理：在该行行尾加注释 `# allow-secret` 即可跳过这一行；紧急情况可以用 `git commit --no-verify` 跳过整个钩子。
+
+钩子还会顺带跑一次 [gitleaks](https://github.com/gitleaks/gitleaks)（装了才跑，`brew install gitleaks`），补齐标准密钥库。
+
 ## 安装
 
 ### Claude Code
@@ -101,7 +131,10 @@ jackson-marketplace/
 │   ├── viral-longform-zh/          # 长图文创作公式
 │   ├── bidirectional-steelman/     # 双向钢人论证
 │   └── big-ambition-prompt/        # 大野心提示词
+├── .githooks/pre-commit            # 提交前安全扫描钩子（本地执行）
 ├── scripts/manage.py               # 新增、同步、校验（内嵌技能模板）
+├── scripts/scan_secrets.py         # 密钥、隐私、危险指令扫描
+├── scripts/install-hooks.sh        # 启用本地钩子
 ├── tests/                          # 维护脚本的行为测试
 └── .github/workflows/validate.yml   # 自动校验
 ```

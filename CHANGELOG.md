@@ -1,5 +1,12 @@
 # 更新记录
 
+## 0.9.0 — 2026-11-16
+
+- 新增提交前安全扫描：`.githooks/pre-commit` 在每次 `git commit` 前扫描暂存内容里的密钥、个人隐私和危险指令，命中直接拦下提交。
+- 扫描规则写在 `scripts/scan_secrets.py`（只用标准库），覆盖 20 多家服务商的令牌格式、私钥块、JWT、带密码的连接串、本机绝对路径、飞书 token 和破坏性命令。
+- 提供 `scripts/install-hooks.sh` 一键启用钩子；误报可在行尾加 `# allow-secret`，紧急情况用 `git commit --no-verify`。
+- 钩子在有 gitleaks 时顺带跑一次标准密钥扫描。
+
 ## 0.8.0 — 2026-11-14
 
 - 移除 `onetake-title`（一分钟治片慌标题）：与 `viral-longform-zh` 在"公众号取标题"上触发重叠，且标题公式同源，保留一份即可。
